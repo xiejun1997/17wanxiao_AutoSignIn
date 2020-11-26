@@ -165,7 +165,7 @@ def WechatPush(title,sckey,success,fail,result):
     content = f"""
 `{strTime}`
 #### 打卡成功用户：
-`{success}`
+`{success+username}`
 #### 打卡失败用户:
 `{fail}`
 #### 主用户打卡信息:
