@@ -57,8 +57,10 @@ class CampusCard:
         """
         resp = requests.post(
             "https://server.17wanxiao.com/campus/cam_iface46/exchangeSecretkey.action",
+            #"https://app.17wanxiao.com:443/campus/cam_iface46/exchangeSecretkey.action",
             headers={
                 "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 5.1.1; HUAWEI MLA-AL10 Build/HUAWEIMLA-AL10)",
+                #"User-Agent": "NCP/5.3.1 (iPhone; iOS 13.5; Scale/2.00)",
             },
             json={
                 "key": self.user_info["rsaKey"]["public"]
@@ -103,6 +105,7 @@ class CampusCard:
         }
         resp = requests.post(
             "https://server.17wanxiao.com/campus/cam_iface46/loginnew.action",
+            #"https://app.17wanxiao.com/campus/cam_iface46/loginnew.action",
             headers={"campusSign": hashlib.sha256(json.dumps(upload_args).encode('utf-8')).hexdigest()},
             json=upload_args,
             verify=False
@@ -116,8 +119,10 @@ class CampusCard:
     def get_main_info(self):
         resp = requests.post(
             "https://reportedh5.17wanxiao.com/api/clock/school/getUserInfo",
+            #"https://reportedh5.17wanxiao.com/api/clock/school/open",
             headers={
-                "Referer": "https://reportedh5.17wanxiao.com/collegeHealthPunch/index.html?token="+self.user_info["sessionId"],
+                #"Referer": "https://reportedh5.17wanxiao.com/collegeHealthPunch/index.html?token="+self.user_info["sessionId"],
+                "Referer": "https://reportedh5.17wanxiao.com/health/index.html?templateid=pneumonia&businessType=epmpics&token="+self.user_info["sessionId"],
                 "Origin": "https://reportedh5.17wanxiao.com",
                 "User-Agent": "Mozilla/5.0 (Linux; Android 5.1.1; HUAWEI MLA-AL10 Build/HUAWEIMLA-AL10; wv) "
                               "AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile "
