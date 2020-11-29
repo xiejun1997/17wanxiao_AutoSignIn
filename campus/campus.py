@@ -119,10 +119,11 @@ class CampusCard:
     #如果不请求一下 token 会失效
     def get_main_info(self):
         resp = requests.post(
-            #"https://reportedh5.17wanxiao.com/api/clock/school/getUserInfo",
             "https://reportedh5.17wanxiao.com/api/clock/school/open",
+            #"https://reportedh5.17wanxiao.com/api/clock/school/getUserInfo",
             headers={
                 #"Referer": "https://reportedh5.17wanxiao.com/collegeHealthPunch/index.html?token="+self.user_info["sessionId"],
+                 "Referer": "https://reportedh5.17wanxiao.com/health/index.html?templateid=pneumonia&businessType=epmpics&versioncode=10531102&systemType=IOS&UAinfo=wanxiao&token="+self.user_info["sessionId"],
                 "Origin": "https://reportedh5.17wanxiao.com",
                 "User-Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E149 Wanxiao/5.3.1"
             },
