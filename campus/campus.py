@@ -1,5 +1,7 @@
 import hashlib
 import json
+import sys
+
 import requests
 import urllib3
 
@@ -111,6 +113,9 @@ class CampusCard:
             self.data = resp["data"]
             self.user_info["login"] = True
             self.user_info["exchangeFlag"] = False
+        else:
+            print(resp['message_'])
+            sys.exit()
         return resp["result_"]
 
     # 如果不请求一下 token 会失效

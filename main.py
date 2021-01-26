@@ -13,6 +13,7 @@ def initLogging():
 
 def main():
     # sectets字段录入
+    i = 0
     sckey, success, failure, result, phone, password = [], [], [], [], [], []
     # 多人循环录入
     while True:
@@ -25,7 +26,6 @@ def main():
         except BaseException:
             break
     # 提交打卡
-
     for index, value in enumerate(phone):
         print("-----------------------")
         print("开始获取用户%s信息" % (value[-4:]))
@@ -41,6 +41,7 @@ def main():
                 if res['code'] == '10000':
                     success.append(value[-4:])
                     msg = value[-4:] + "-打卡成功-" + strTime
+                    i = 1
                     result = res
                     break
                 else:
@@ -49,7 +50,7 @@ def main():
                     count = count + 1
                     print('%s打卡失败，开始第%d次重试...' % (value[-6:], count))
                     time.sleep(301)
-
+                print(res.text)
             except Exception as err:
                 print(err)
                 msg = '出现错误'
@@ -61,7 +62,7 @@ def main():
     title = "成功: %s 人,失败: %s 人" % (len(success), len(fail))
     for _ in range(1):
         try:
-            if sckey[0]:
+            if sckey[0] & i == 1:
                 print('开始Wechat推送...')
                 WechatPush(title, sckey[0], success, fail, result)
                 break
