@@ -25,15 +25,13 @@ class CampusCard:
             self.exchange_secret()
             self.login(phone, password)
 
-        """
-        with open(user_info[1].format(phone), 'w') as f:
-            f.write(self.save_user_info())
-        """
+
     @staticmethod
     def __create_blank_user__():
         """
         当传入的已登录设备信息不可用时，虚拟一个空的未登录设备
         :return: 空设备信息
+        2021.01.26: deviceId:设备的IMEI码，设备需要用验证码方式登录完美校园后才有效（强烈建议用模拟器）
         """
         rsa_keys = rsa.create_key_pair(1024)
         return {
@@ -42,7 +40,7 @@ class CampusCard:
             'exchangeFlag': True,
             'login': False,
             'serverPublicKey': '',
-            'deviceId': str(random.randint(999999999999999, 9999999999999999)),
+            'deviceId': 868146026942328,
             'wanxiaoVersion': 10531102,
             'rsaKey': {
                 'private': rsa_keys[1],
@@ -56,10 +54,8 @@ class CampusCard:
         :return:
         """
         resp = requests.post(
-            #"https://server.17wanxiao.com/campus/cam_iface46/exchangeSecretkey.action",
-            "https://app.17wanxiao.com:443/campus/cam_iface46/exchangeSecretkey.action",
+            "https://app.17wanxiao.com/campus/cam_iface46/exchangeSecretkey.action",
             headers={
-                #"User-Agent": "Dalvik/2.1.0 (Linux; U; Android 5.1.1; HUAWEI MLA-AL10 Build/HUAWEIMLA-AL10)",
                 "User-Agent": "NCP/5.3.1 (iPhone; iOS 13.5; Scale/2.00)",
             },
             json={
@@ -70,6 +66,7 @@ class CampusCard:
         session_info = json.loads(
             rsa.rsa_decrypt(resp.text.encode(resp.apparent_encoding), self.user_info["rsaKey"]["private"])
         )
+
         self.user_info["sessionId"] = session_info["session"]
         self.user_info["appKey"] = session_info["key"][:24]
 
@@ -90,7 +87,7 @@ class CampusCard:
             "password": password_list,
             "qudao": "guanwang",
             "requestMethod": "cam_iface46/loginnew.action",
-            "shebeixinghao": "iPhone12",
+            "shebeixinghao": "iPhoneXR",
             "systemType": "iOS",
             "telephoneInfo": "13.5",
             "telephoneModel": "iPhone",
@@ -104,7 +101,6 @@ class CampusCard:
             "data": des_3.object_encrypt(login_args, self.user_info["appKey"])
         }
         resp = requests.post(
-            #"https://server.17wanxiao.com/campus/cam_iface46/loginnew.action",
             "https://app.17wanxiao.com/campus/cam_iface46/loginnew.action",
             headers={"campusSign": hashlib.sha256(json.dumps(upload_args).encode('utf-8')).hexdigest()},
             json=upload_args,
@@ -119,10 +115,8 @@ class CampusCard:
     #如果不请求一下 token 会失效
     def get_main_info(self):
         resp = requests.post(
-            #"https://reportedh5.17wanxiao.com/api/clock/school/open",
             "https://reportedh5.17wanxiao.com/api/clock/school/getUserInfo",
             headers={
-                #"Referer": "https://reportedh5.17wanxiao.com/collegeHealthPunch/index.html?token="+self.user_info["sessionId"],
                 "Referer": "https://reportedh5.17wanxiao.com/health/index.html?templateid=pneumonia&businessType=epmpics&versioncode=10531102&systemType=IOS&UAinfo=wanxiao&token="+self.user_info["sessionId"],
                 "Origin": "https://reportedh5.17wanxiao.com",
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E149 Wanxiao/5.3.1"
