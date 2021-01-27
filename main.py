@@ -125,7 +125,7 @@ def check_in(token):
 def WechatPush(title, sckey, success, fail, result):
     send_url = f"https://sc.ftqq.com/{sckey}.send"
     strTime = GetNowTime()
-    if fail == None:
+    if fail is None:
        fail = ["我见青山多妩媚"]
        fail = ''.join(fai)
     page = json.dumps(result, sort_keys=True, indent=4, separators=(',', ':'), ensure_ascii=False)
