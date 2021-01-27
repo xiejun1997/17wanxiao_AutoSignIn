@@ -36,7 +36,7 @@ def main():
                 campus = CampusCard(phone[index], password[index])
                 token = campus.user_info["sessionId"]
                 time.sleep(1)
-                res = check_in(token).json()
+                res = check_in(token)
                 strTime = GetNowTime()
                 if res['code'] == '10000':
                     success.append(value[-4:])
@@ -124,7 +124,7 @@ def check_in(token):
     # print(jsons)
     # 提交打卡
     time.sleep(2)
-    res = requests.post(sign_url, json=jsons, timeout=10)
+    res = requests.post(sign_url, json=jsons, timeout=10).json()
     print(res)
     return res
 
