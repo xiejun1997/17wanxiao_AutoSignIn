@@ -50,7 +50,7 @@ def main():
                     count = count + 1
                     print('%s打卡失败，开始第%d次重试...' % (value[-6:], count))
                     time.sleep(301)
-                print(res.text)
+                print(res)
             except Exception as err:
                 print(err)
                 msg = '出现错误'
