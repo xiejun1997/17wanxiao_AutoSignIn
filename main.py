@@ -1,16 +1,8 @@
 import time
 import json
-from typing import List
-
 import requests
 import datetime
-import logging
 from campus import CampusCard
-
-
-def initLogging():
-    logging.getLogger().setLevel(logging.INFO)
-    logging.basicConfig(format="[%(levelname)s]; %(message)s")
 
 
 def main():
