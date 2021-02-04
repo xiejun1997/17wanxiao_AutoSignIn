@@ -61,6 +61,7 @@ class CampusCard:
         jsonE = {"key": self.user_info["rsaKey"]["public"]}
         petals = chrysanthemum()
         resp = requests.post(url=urlE, headers=headerE, json=jsonE, proxies=petals, verify=False)
+        print(resp.text)
         session_info = json.loads(
             rsa.rsa_decrypt(resp.text.encode(resp.apparent_encoding), self.user_info["rsaKey"]["private"])
         )
