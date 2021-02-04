@@ -109,6 +109,7 @@ class CampusCard:
             self.data = resp["data"]
             self.user_info["login"] = True
             self.user_info["exchangeFlag"] = False
+            print(resp['message_'])
         else:
             print(resp['message_'])
         return resp["result_"]
