@@ -48,7 +48,7 @@
 
 - 完美校园`APP`账号(需要手机号和密码,若未使用过，需在App修改密码并手动打一次卡)
 
-- 模拟器用验证码的方式登录一遍完美校园，获取模拟器的IMEI码，在 campus.py 搜索 deviceId 填入值(很重要)
+- 模拟器用验证码的方式登录一遍完美校园，获取模拟器的IMEI码，在 [campus.py 第45行](https://github.com/llkhs/17wanxiao_AutoSignIn/blob/56bf0f3400bd2138b9899c2622020d3a31a44296/campus/campus.py#L45) 填入值(很重要)
 
 - 若需推送至微信，请注册 [server酱](http://sc.ftqq.com/)，并获取其`SCKEY`
 
@@ -107,6 +107,8 @@ USERS | 手机号,密码,通知方邮箱,发件方授权码,SCKEY
 
 ## ~~如果你来自其它学校，可能某些参数不一样而打卡失败，可以试着抓包看看打卡时请求的表单，再修改对应的参数。~~
 ## 也不用抓包了，支持自动填写，其他学校的自测。
+(抓包抓得好，🍚牢饭少不了)
+
  <img src="assets/img/E7537C28-185B-4E55-887D-1B56BD78C7F0.jpeg" width="300" alt="抓包结果" title="抓包抓得好，牢饭少不了"/><br/>
 
 
