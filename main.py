@@ -33,9 +33,6 @@ def main():
         while count < 2:
             try:
                 campus = CampusCard(phone[index], password[index])
-                if campus['code_'] == '5':
-                    msg = campus['message_']
-                    break
                 token = campus.user_info["sessionId"]
                 res = check_in(token).json()
                 strTime = GetNowTime()
