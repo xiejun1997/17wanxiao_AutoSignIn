@@ -4,11 +4,15 @@ from email.mime.text import MIMEText
 import time
 
 
-def sendEmail(mail, key):
+def sendEmail(mail, key, msg):
+    print(msg)
+    if msg['msg']:
+        subject = "----------失败"  # 主题
+    else:
+        subject = " ♡ 打卡成功"  # 主题
     msg_from = 'llkhs@qq.com'  # 发送方邮箱，
     passwd = ''.join(key)  # 填入发送方邮箱的授权码
     msg_to = ''.join(mail)   # 收件人邮箱
-    subject = " ♡ 打卡成功"  # 主题
     content = timer()
     msg = MIMEText(content)
     msg['Subject'] = subject

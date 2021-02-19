@@ -28,7 +28,7 @@ def main():
     # 提交打卡
     print("-----------------------")
     for index, value in enumerate(phone):
-        count, msg = 0, "null"
+        count, msg, isSmail = 0, "null", False
         print("开始获取用户%s信息" % (value[-4:]))
         while count < 2:
             try:
@@ -40,7 +40,6 @@ def main():
                     success.append(value[-4:])
                     msg = value[-4:] + "-打卡成功-" + strTime
                     result = res
-
                     break
                 else:
                     failure.append(value[-4:])
@@ -48,17 +47,21 @@ def main():
                     count = count + 1
                     print('%s打卡失败，开始第%d次重试...' % (value[-4:], count))
                     result = campus
-                    time.sleep(2)
+                    time.sleep(10)
 
             except Exception as err:
                 print(err)
-                msg = '出现错误'
+                msg = {'msg': '925', 'data': '出现错误'}
+                isSmail = False
                 failure.append(value[-4:])
-                break
+                count = count + 1
         print(msg)
         try:
-            Smail = sendEmail(mail[index], key[0])
-            print(Smail)
+            if isSmail:
+                Smail = sendEmail(mail[index], key[0], msg)
+                print(Smail)
+            else:
+                break
         except Exception:
             print('邮箱异常')
         print("-----------------------")
