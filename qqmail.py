@@ -4,12 +4,13 @@ from email.mime.text import MIMEText
 import time
 
 
-def sendEmail(mail, key, isSmailcode):
-    print(isSmailcode)
-    if isSmailcode['code'] == 110:
-        subject = "----------失败"  # 主题
-    else:
+def sendEmail(mail, key, isSmailCode):
+    print(isSmailCode)
+    if isSmailCode == 1:
         subject = " ♡ 打卡成功"  # 主题
+    else:
+        subject = "----------失败"  # 主题
+
     msg_from = 'llkhs@qq.com'  # 发送方邮箱，
     passwd = ''.join(key)  # 填入发送方邮箱的授权码
     msg_to = ''.join(mail)   # 收件人邮箱

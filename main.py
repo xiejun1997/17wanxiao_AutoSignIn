@@ -28,7 +28,7 @@ def main():
     # 提交打卡
     print("-----------------------")
     for index, value in enumerate(phone):
-        count, msg, isSmail = 0, "null", {}
+        count, msg, isSmail = 0, "null", 0
         print("开始获取用户%s信息" % (value[-4:]))
         while count < 2:
             try:
@@ -39,7 +39,7 @@ def main():
                 if res['code'] == '10000':
                     success.append(value[-4:])
                     msg = value[-4:] + "-打卡成功-" + strTime
-                    isSmail = {'code': '114'}
+                    isSmail = 1
                     result = res
                     break
                 else:
@@ -53,7 +53,7 @@ def main():
             except Exception as err:
                 print(err)
                 msg = '出现错误'
-                isSmail = {'code': '110'}
+                isSmail = False
                 failure.append(value[-4:])
                 count = count + 1
                 time.sleep(10)
