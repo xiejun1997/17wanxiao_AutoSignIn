@@ -102,6 +102,14 @@ class CampusCard:
             proxies=petals,
             verify=False
         ).json()
+        """
+        -From ReaJason
+        {'result_': True, 'data': '........', 'message_': '登录成功', 'code_': '0'}
+        {'result_': False, 'message_': '该手机号未注册完美校园', 'code_': '4'}
+        {'result_': False, 'message_': '您正在新设备上使用完美校园，请使用验证码进行验证登录', 'code_': '5'}
+        {'result_': False, 'message_': '密码错误,您还有5次机会!', 'code_': '5'}
+        -
+        """
         if resp["result_"]:
             self.data = resp["data"]
             self.user_info["login"] = True
@@ -109,9 +117,10 @@ class CampusCard:
             print(resp['message_'])
             return resp["result_"]
         else:
-            errlogin = resp['message_']
-            print(errlogin)
-            return errlogin
+            errmsg = resp['message_']
+            print(errmsg)
+            print(errmsg)
+            return None
 
     def save_user_info(self):
         """

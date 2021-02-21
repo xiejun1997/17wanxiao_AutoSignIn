@@ -28,11 +28,13 @@ def main():
     # 提交打卡
     print("-----------------------")
     for index, value in enumerate(phone):
-        count, msg, isSmail = 0, "null", 0
+        i, count, msg, isSmail = 0, 0, "", 0
         print("开始获取用户%s信息" % (value[-4:]))
         while count < 2:
             try:
                 campus = CampusCard(phone[index], password[index])
+                if campus:
+                    break
                 token = campus.user_info["sessionId"]
                 res = check_in(token).json()
                 strTime = GetNowTime()
@@ -45,18 +47,16 @@ def main():
                 else:
                     failure.append(value[-4:])
                     msg = value[-4:] + "-失败-" + strTime
-                    count = count + 1
                     print('%s打卡失败，开始第%d次重试...' % (value[-4:], count))
                     result = campus
+                    count += 1
                     time.sleep(10)
-
             except Exception as err:
                 print(err)
                 msg = '出现错误'
                 isSmail = False
+                count += 1
                 failure.append(value[-4:])
-                count = count + 1
-                time.sleep(10)
         print(msg)
         if isSmail:
             try:
