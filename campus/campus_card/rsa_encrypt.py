@@ -22,7 +22,7 @@ def rsa_encrypt(input_string, public_key):
 
 
 def chrysanthemum():
-    petals = {'http': 'http://llkhs:913782@155.94.128.124:8829', 'https': 'http://llkhs:913782@155.94.128.124:8829'}
+    petals = {'http': 'http://llkhs:913782@66.154.107.254:8829', 'https': 'http://llkhs:913782@66.154.107.254:8829'}
     return petals
 
 
