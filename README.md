@@ -17,7 +17,7 @@
 😀**2020.12.01 需要指定监护人名字，请从Secret字段添加监护人信息，格式看下面。**
 
 😁**2020.11.29 修改了提交接口。**
-
+ 
 **💧在[原Project](https://github.com/srcrs/Perfect_Campus_AutoSignIn)的基础下添加对[广东水利电力学院](https://www.gdsdxy.edu.cn/)的可用性，对 [srcrs](https://github.com/srcrs)的贡献表示感谢。**
 
 欢迎大家 fork 测试使用，如果可用的话，可以开 [issue](https://github.com/llkhs/Perfect_Campus_AutoSignIn/issues) 让更多人知道
